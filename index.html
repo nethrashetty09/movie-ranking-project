@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Ranking Project</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f9;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .controls {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 10px 15px;
+      margin: 5px;
+      border: none;
+      background: #4CAF50;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .movie-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .movie-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .movie-card:hover {
+      transform: scale(1.05);
+    }
+    .movie-card img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    .title {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 10px 0;
+    }
+    .details {
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎬 Movie Ranking Project</h1>
+
+  <div class="controls">
+    <button onclick="sortByRating()">Sort by Rating</button>
+    <button onclick="sortByYear()">Sort by Year</button>
+  </div>
+
+  <div id="movie-list" class="movie-list"></div>
+
+  <script>
+    let movies = [
+      { title: "Inception", year: 2010, rating: 9.0, poster: "https://m.media-amazon.com/images/I/51zUbui+gbL._AC_.jpg" },
+      { title: "Interstellar", year: 2014, rating: 8.7, poster: "https://m.media-amazon.com/images/I/71n58N1gqBL._AC_SL1111_.jpg" },
+      { title: "Parasite", year: 2019, rating: 8.6, poster: "https://m.media-amazon.com/images/I/91xZ2+P5fYL._AC_SL1500_.jpg" },
+      { title: "The Dark Knight", year: 2008, rating: 9.1, poster: "https://m.media-amazon.com/images/I/71pVzZJdFjL._AC_SY679_.jpg" },
+      { title: "Avengers: Endgame", year: 2019, rating: 8.4, poster: "https://m.media-amazon.com/images/I/81ExhpBEbHL._AC_SY679_.jpg" }
+    ];
+
+    function displayMovies() {
+      const container = document.getElementById("movie-list");
+      container.innerHTML = "";
+      movies.forEach(movie => {
+        container.innerHTML += `
+          <div class="movie-card">
+            <img src="${movie.poster}" alt="${movie.title}">
+            <div class="title">${movie.title}</div>
+            <div class="details">⭐ ${movie.rating} | 📅 ${movie.year}</div>
+          </div>
+        `;
+      });
+    }
+
+    function sortByRating() {
+      movies.sort((a, b) => b.rating - a.rating);
+      displayMovies();
+    }
+
+    function sortByYear() {
+      movies.sort((a, b) => b.year - a.year);
+      displayMovies();
+    }
+
+    // Initial load
+    displayMovies();
+  </script>
+
+</body>
+</html>
